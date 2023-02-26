@@ -42,3 +42,6 @@ class Bishop(x: Int, y: Int, name: String, board: Board) : Piece(x, y, name, boa
 class Knight(x: Int, y: Int, name: String, board: Board) : Piece(x, y, name, board) {
 
 }
+class CheckerPeice(x: Int, y: Int, name: String, board: Board) : Piece(x, y, name, board) {
+
+}
