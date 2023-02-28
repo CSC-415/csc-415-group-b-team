@@ -14,3 +14,4 @@ abstract class Piece(x: Int, y: Int, name: String, board: Board) {
         }
     }
 }
+

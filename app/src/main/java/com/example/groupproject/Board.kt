@@ -1,4 +1,4 @@
-package com.example.groupproject
+ package com.example.groupproject
 
 class Board {
 
@@ -54,3 +54,4 @@ class Board {
         board[6][7] = Space(6, 7, Pawn(6, 7, "wp", this))
     }
 }
+
