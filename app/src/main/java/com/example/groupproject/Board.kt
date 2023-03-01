@@ -1,6 +1,8 @@
  package com.example.groupproject
 
-class Board {
+
+
+ class Board {
 
     var board = Array(8) { Array(8) { Any() } }
 
@@ -19,39 +21,42 @@ class Board {
         }
 
         //put pieces in starting spaces
-        board[0][0] = Space(0, 0, Rook(0, 0, "bR", this))
-        board[0][1] = Space(0, 1, Knight(0, 1, "bN", this))
-        board[0][2] = Space(0, 2, Bishop(0, 2, "bB", this))
-        board[0][3] = Space(0, 3, Queen(0, 3, "bQ", this))
-        board[0][4] = Space(0, 4, King(0, 4, "bK", this))
-        board[0][5] = Space(0, 5, Bishop(0, 5, "bB", this))
-        board[0][6] = Space(0, 6, Knight(0, 6, "bN", this))
-        board[0][7] = Space(0, 7, Rook(0, 7, "bR", this))
-        board[1][0] = Space(1, 0, Pawn(1, 0, "bp", this))
-        board[1][1] = Space(1, 1, Pawn(1, 1, "bp", this))
-        board[1][2] = Space(1, 2, Pawn(1, 2, "bp", this))
-        board[1][3] = Space(1, 3, Pawn(1, 3, "bp", this))
-        board[1][4] = Space(1, 4, Pawn(1, 4, "bp", this))
-        board[1][5] = Space(1, 5, Pawn(1, 5, "bp", this))
-        board[1][6] = Space(1, 6, Pawn(1, 6, "bp", this))
-        board[1][7] = Space(1, 7, Pawn(1, 7, "bp", this))
 
-        board[7][0] = Space(7, 0, Rook(7, 0, "wR", this))
-        board[7][1] = Space(7, 1, Knight(7, 1, "wN", this))
-        board[7][2] = Space(7, 2, Bishop(7, 2, "wB", this))
-        board[7][3] = Space(7, 3, Queen(7, 3, "wQ", this))
-        board[7][4] = Space(7, 4, King(7, 4, "wK", this))
-        board[7][5] = Space(7, 5, Bishop(7, 5, "wB", this))
-        board[7][6] = Space(7, 6, Knight(7, 6, "wN", this))
-        board[7][7] = Space(7, 7, Rook(7, 7, "wR", this))
-        board[6][0] = Space(6, 0, Pawn(6, 0, "wp", this))
-        board[6][1] = Space(6, 1, Pawn(6, 1, "wp", this))
-        board[6][2] = Space(6, 2, Pawn(6, 2, "wp", this))
-        board[6][3] = Space(6, 3, Pawn(6, 3, "wp", this))
-        board[6][4] = Space(6, 4, Pawn(6, 4, "wp", this))
-        board[6][5] = Space(6, 5, Pawn(6, 5, "wp", this))
-        board[6][6] = Space(6, 6, Pawn(6, 6, "wp", this))
-        board[6][7] = Space(6, 7, Pawn(6, 7, "wp", this))
+        //black pieces
+        board[0][0] = Space(0, 0, Piece.Rook(0, 0, false))
+        board[0][1] = Space(0, 1, Piece.Knight(0, 1, false))
+        board[0][2] = Space(0, 2, Piece.Bishop(0, 2, false))
+        board[0][3] = Space(0, 3, Piece.Queen(0, 3, false))
+        board[0][4] = Space(0, 4, Piece.King(0, 4, false))
+        board[0][5] = Space(0, 5, Piece.Bishop(0, 5, false))
+        board[0][6] = Space(0, 6, Piece.Knight(0, 6, false))
+        board[0][7] = Space(0, 7, Piece.Rook(0, 7, false))
+        board[1][0] = Space(1, 0, Piece.Pawn(1, 0, false))
+        board[1][1] = Space(1, 1, Piece.Pawn(1, 1, false))
+        board[1][2] = Space(1, 2, Piece.Pawn(1, 2, false))
+        board[1][3] = Space(1, 3, Piece.Pawn(1, 3, false))
+        board[1][4] = Space(1, 4, Piece.Pawn(1, 4, false))
+        board[1][5] = Space(1, 5, Piece.Pawn(1, 5, false))
+        board[1][6] = Space(1, 6, Piece.Pawn(1, 6, false))
+        board[1][7] = Space(1, 7, Piece.Pawn(1, 7, false))
+
+        //white pieces
+        board[7][0] = Space(7, 0, Piece.Rook(7, 0, true))
+        board[7][1] = Space(7, 1, Piece.Knight(7, 1, true))
+        board[7][2] = Space(7, 2, Piece.Bishop(7, 2, true))
+        board[7][3] = Space(7, 3, Piece.Queen(7, 3, true))
+        board[7][4] = Space(7, 4, Piece.King(7, 4, true))
+        board[7][5] = Space(7, 5, Piece.Bishop(7, 5, true))
+        board[7][6] = Space(7, 6, Piece.Knight(7, 6, true))
+        board[7][7] = Space(7, 7, Piece.Rook(7, 7, true))
+        board[6][0] = Space(6, 0, Piece.Pawn(6, 0, true))
+        board[6][1] = Space(6, 1, Piece.Pawn(6, 1, true))
+        board[6][2] = Space(6, 2, Piece.Pawn(6, 2, true))
+        board[6][3] = Space(6, 3, Piece.Pawn(6, 3, true))
+        board[6][4] = Space(6, 4, Piece.Pawn(6, 4, true))
+        board[6][5] = Space(6, 5, Piece.Pawn(6, 5, true))
+        board[6][6] = Space(6, 6, Piece.Pawn(6, 6, true))
+        board[6][7] = Space(6, 7, Piece.Pawn(6, 7, true))
     }
 }
 
