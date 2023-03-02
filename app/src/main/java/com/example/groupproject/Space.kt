@@ -1,7 +1,5 @@
 package com.example.groupproject
 
-import java.lang.reflect.Constructor
-
 class Space {
     var isBlackSpace : Boolean = false
 
