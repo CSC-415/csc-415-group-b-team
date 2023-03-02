@@ -1,4 +1,8 @@
 package com.example.groupproject
 
-class BlackJack {
-}
+data class BlackJack(
+    val Queen: Int,
+    val King: Int,
+    val Jack: Int,
+    val Ace: Int,
+    )
