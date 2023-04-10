@@ -51,13 +51,17 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     }
 
     private fun validateMove(piece: Piece, x: Int, y: Int) : Validation {
-        when (piece) {
-            is Piece.Pawn -> validatePawn(piece, x, y)
-            is Piece.Bishop -> validateBishop(piece, x, y)
-            is Piece.Knight -> validateKnight(piece, x, y)
-            is Piece.Rook -> validateRook(piece, x, y)
-            is Piece.Queen -> validateQueen(piece, x ,y)
-            is Piece.King -> validateKing(piece, x, y)
+        if (x > 7 || y > 7) { //move is out of bounds
+            return Validation(false, false)
+        } else { //move is in bounds
+            return when (piece) {
+                is Piece.Pawn -> validatePawn(piece, x, y)
+                is Piece.Bishop -> validateBishop(piece, x, y)
+                is Piece.Knight -> validateKnight(piece, x, y)
+                is Piece.Rook -> validateRook(piece, x, y)
+                is Piece.Queen -> validateQueen(piece, x ,y)
+                is Piece.King -> validateKing(piece, x, y)
+            }
         }
     }
 
