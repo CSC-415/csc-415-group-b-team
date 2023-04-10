@@ -48,4 +48,22 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         )
     }
 
+    private fun validateMove(piece: Piece, x: Int, y: Int) : Boolean {
+        when (piece) {
+            is Piece.Pawn -> validatePawn(piece, x, y)
+            is Piece.Bishop -> validateBishop(piece, x, y)
+            is Piece.Knight -> validateKnight(piece, x, y)
+            is Piece.Rook -> validateRook(piece, x, y)
+            is Piece.Queen -> validateQueen(piece, x ,y)
+            is Piece.King -> validateKing(piece, x, y)
+        }
+    }
+
+    private fun validatePawn (piece: Piece, x: Int, y: Int) : Boolean {}
+    private fun validateBishop (piece: Piece, x: Int, y: Int) : Boolean {}
+    private fun validateKnight (piece: Piece, x: Int, y: Int) : Boolean {}
+    private fun validateRook (piece: Piece, x: Int, y: Int) : Boolean {}
+    private fun validateQueen (piece: Piece, x: Int, y: Int) : Boolean {}
+    private fun validateKing (piece: Piece, x: Int, y: Int) : Boolean {}
+
 }
