@@ -246,7 +246,30 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     }
     private fun validateRook (piece: Piece, x: Int, y: Int) : Validation {}
     private fun validateQueen (piece: Piece, x: Int, y: Int) : Validation {}
-    private fun validateKing (piece: Piece, x: Int, y: Int) : Validation {}
+    private fun validateKing (piece: Piece, x: Int, y: Int) : Validation {
+        if((x-1==piece.x || x+1==piece.x) && (y-1==piece.y || y+1==piece.y) ) {  //if move want to do is within 1 space of original king
+            if (checkCollision(x, y) == null) {
+                return Validation(true, false)
+            } else {
+                var targetPiece = checkCollision(x, y)
+                if (targetPiece != null) {
+                    if (piece.isWhitePiece && targetPiece.isWhitePiece) {
+                        return Validation(false, false)
+                    } else if (piece.isWhitePiece && targetPiece.isWhitePiece == false) {
+                        return Validation(true, true)
+                    } else if (piece.isWhitePiece == false && targetPiece.isWhitePiece == false) {
+                        return Validation(false, false)
+                    } else if (piece.isWhitePiece == false && targetPiece.isWhitePiece) {
+                        return Validation(true, true)
+                    }
+                }
+            }
+        }
+        else{
+              return Validation(false,false)
+        }
+        return Validation(false,false)
+    }
 
     private fun checkCollision (x: Int, y: Int) : Piece? {
         var targetSpace = board.board[x][y]
