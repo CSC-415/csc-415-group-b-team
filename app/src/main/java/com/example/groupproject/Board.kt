@@ -4,7 +4,7 @@
 
  class Board {
 
-    var board = Array(8) { Array(8) { Any() } }
+    var board = arrayOf<Array<Space>>()
 
     val blackKingX = 0
     val blackKingY = 4

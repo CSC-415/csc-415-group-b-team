@@ -20,6 +20,8 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     private var movingPieceX = -1f
     private var movingPieceY = -1f
 
+    private var board = Board()
+
     override fun onDraw(canvas: Canvas?) {
         canvas ?: return
 
@@ -59,11 +61,42 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         }
     }
 
-    private fun validatePawn (piece: Piece, x: Int, y: Int) : Boolean {}
+    private fun validatePawn (piece: Piece, x: Int, y: Int) : Boolean {
+        if (piece.isWhitePiece) { //white piece logic
+            if (piece.x == 6) { //starting move
+                if (y == piece.y) { //non-capture move
+                    if (x - piece.x == 1 || x - piece.x == 2) { //move forward 1 or 2 spaces
+
+                    } else { //invalid move
+                        return false
+                    }
+                } else { //capture move
+
+                }
+            } else { //non starting move
+
+            }
+        } else { //black piece logic
+            if (piece.x == 1) { //starting move
+
+            } else { //non starting move
+
+            }
+        }
+    }
     private fun validateBishop (piece: Piece, x: Int, y: Int) : Boolean {}
     private fun validateKnight (piece: Piece, x: Int, y: Int) : Boolean {}
     private fun validateRook (piece: Piece, x: Int, y: Int) : Boolean {}
     private fun validateQueen (piece: Piece, x: Int, y: Int) : Boolean {}
     private fun validateKing (piece: Piece, x: Int, y: Int) : Boolean {}
+
+    private fun checkCollision (piece: Piece, x: Int, y: Int) : Piece? {
+        var targetSpace = board.board[x][y]
+        if (targetSpace.piece == null) {
+            return null
+        } else {
+            return targetSpace.piece
+        }
+    }
 
 }
