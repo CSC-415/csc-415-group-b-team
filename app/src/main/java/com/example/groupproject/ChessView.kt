@@ -1,9 +1,10 @@
 package com.example.groupproject
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.util.AttributeSet
-import android.view.MotionEvent
 import android.view.View
 import kotlin.math.min
 
@@ -96,7 +97,125 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
             }
         }
     }
-    private fun validateBishop (piece: Piece, x: Int, y: Int) : Validation {}
+    private fun validateBishop(piece: Piece, x: Int, y: Int): Validation {
+        var i = 1
+        while (i <= 7) { //going top right
+            var xHolder = (piece.x) + i
+            var yHolder = (piece.y) + i
+            if (xHolder == x && yHolder == y) {//if at where want to move
+                if (checkCollision(x, y) == null) {
+                    return Validation(true, false)
+                }
+                var targetPiece = checkCollision(x, y)
+                if (targetPiece != null) {
+                    if (piece.isWhitePiece && targetPiece.isWhitePiece) {
+                        return Validation(false, false)
+                    } else if (piece.isWhitePiece && targetPiece.isWhitePiece == false) {
+                        return Validation(true, true)
+                    } else if (piece.isWhitePiece == false && targetPiece.isWhitePiece == false) {
+                        return Validation(false, false)
+                    } else if (piece.isWhitePiece == false && targetPiece.isWhitePiece) {
+                        return Validation(true, true)
+                    }
+                }
+            } else if (checkCollision(xHolder, yHolder) != null) { //if collides before reaching where want to move
+                break
+            } else if (xHolder > 7 || xHolder < 0 || yHolder > 7 || yHolder < 0) {//out of bound
+                break
+            } else {
+                i++
+            }
+        }
+
+        i = 1
+        while (i >= 7) { //going top left
+            var xHolder = (piece.x) + i
+            var yHolder = (piece.y) - i
+            if (xHolder == x && yHolder == y) {//if at where want to move
+                if (checkCollision(x, y) == null) {
+                    return Validation(true, false)
+                }
+                var targetPiece = checkCollision(x, y)
+                if (targetPiece != null) {
+                    if (piece.isWhitePiece && targetPiece.isWhitePiece) {
+                        return Validation(false, false)
+                    } else if (piece.isWhitePiece && targetPiece.isWhitePiece == false) {
+                        return Validation(true, true)
+                    } else if (piece.isWhitePiece == false && targetPiece.isWhitePiece == false) {
+                        return Validation(false, false)
+                    } else if (piece.isWhitePiece == false && targetPiece.isWhitePiece) {
+                        return Validation(true, true)
+                    }
+                }
+            } else if (checkCollision(xHolder, yHolder) != null) { //if collides before reaching where want to move
+                break
+            } else if (xHolder > 7 || xHolder < 0 || yHolder > 7 || yHolder < 0) {//out of bound
+                break
+            } else {
+                i++
+            }
+        }
+
+        i = 1
+        while (i >= 7) { //going bottom right
+            var xHolder = (piece.x) - i
+            var yHolder = (piece.y) + i
+            if (xHolder == x && yHolder == y) {//if at where want to move
+                if (checkCollision(x, y) == null) {
+                    return Validation(true, false)
+                }
+                var targetPiece = checkCollision(x, y)
+                if (targetPiece != null) {
+                    if (piece.isWhitePiece && targetPiece.isWhitePiece) {
+                        return Validation(false, false)
+                    } else if (piece.isWhitePiece && targetPiece.isWhitePiece == false) {
+                        return Validation(true, true)
+                    } else if (piece.isWhitePiece == false && targetPiece.isWhitePiece == false) {
+                        return Validation(false, false)
+                    } else if (piece.isWhitePiece == false && targetPiece.isWhitePiece) {
+                        return Validation(true, true)
+                    }
+                }
+            } else if (checkCollision(xHolder, yHolder) != null) { //if collides before reaching where want to move
+                break
+            } else if (xHolder > 7 || xHolder < 0 || yHolder > 7 || yHolder < 0) {//out of bound
+                break
+            } else {
+                i++
+            }
+        }
+
+        i = 1
+        while (i >= 7) { //going bottom left
+            var xHolder = (piece.x) - i
+            var yHolder = (piece.y) - i
+            if (xHolder == x && yHolder == y) {//if at where want to move
+                if (checkCollision(x, y) == null) {
+                    return Validation(true, false)
+                }
+                var targetPiece = checkCollision(x, y)
+                if (targetPiece != null) {
+                    if (piece.isWhitePiece && targetPiece.isWhitePiece) {
+                        return Validation(false, false)
+                    } else if (piece.isWhitePiece && targetPiece.isWhitePiece == false) {
+                        return Validation(true, true)
+                    } else if (piece.isWhitePiece == false && targetPiece.isWhitePiece == false) {
+                        return Validation(false, false)
+                    } else if (piece.isWhitePiece == false && targetPiece.isWhitePiece) {
+                        return Validation(true, true)
+                    }
+                }
+            } else if (checkCollision(xHolder, yHolder) != null) { //if collides before reaching where want to move
+                break
+            } else if (xHolder > 7 || xHolder < 0 || yHolder > 7 || yHolder < 0) {//out of bound
+                break
+            } else {
+                i++
+            }
+        }
+
+        return Validation(false, false)
+    }
     private fun validateKnight (piece: Piece, x: Int, y: Int) : Validation {  //piece.x is starting x= moving to
         if((piece.x+1 == x && piece.y+2 ==y)||(piece.x+2 == x && piece.y+1 ==y)||(piece.x-1 == x && piece.y+2 ==y)||(piece.x-2 == x && piece.y+1 ==y)||(piece.x+1 == x && piece.y-2 ==y)||(piece.x+2 == x && piece.y-1 ==y)||(piece.x-1 == x && piece.y-2 ==y)||(piece.x-2 == x && piece.y-1 ==y)) {  //is the move a possiible valid move, dont have to look at out of bounds as done above
             if (checkCollision(x,y) === null){
