@@ -52,12 +52,12 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
 
     private fun validateMove(piece: Piece, x: Int, y: Int) : Validation {
         when (piece) {
-            is Piece.Pawn -> return validatePawn(piece, x, y)
-            is Piece.Bishop -> return validateBishop(piece, x, y)
-            is Piece.Knight -> return validateKnight(piece, x, y)
-            is Piece.Rook -> return validateRook(piece, x, y)
-            is Piece.Queen -> return validateQueen(piece, x ,y)
-            is Piece.King -> return validateKing(piece, x, y)
+            is Piece.Pawn -> validatePawn(piece, x, y)
+            is Piece.Bishop -> validateBishop(piece, x, y)
+            is Piece.Knight -> validateKnight(piece, x, y)
+            is Piece.Rook -> validateRook(piece, x, y)
+            is Piece.Queen -> validateQueen(piece, x ,y)
+            is Piece.King -> validateKing(piece, x, y)
         }
     }
 
@@ -78,7 +78,7 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
                     if (checkCollision(x,y) == null) { //nothing in the way
                         return Validation(true, false)
                     } else { //invalid move, something in the way
-
+                        
                     }
                 }
             } else { //non starting move
@@ -93,33 +93,7 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         }
     }
     private fun validateBishop (piece: Piece, x: Int, y: Int) : Validation {}
-    private fun validateKnight (piece: Piece, x: Int, y: Int) : Validation {  //piece.x is starting x= moving to
-        if((piece.x+1 == x && piece.y+2 ==y)||(piece.x+2 == x && piece.y+1 ==y)||(piece.x-1 == x && piece.y+2 ==y)||(piece.x-2 == x && piece.y+1 ==y)||(piece.x+1 == x && piece.y-2 ==y)||(piece.x+2 == x && piece.y-1 ==y)||(piece.x-1 == x && piece.y-2 ==y)||(piece.x-2 == x && piece.y-1 ==y)) {  //is the move a possiible valid move, dont have to look at out of bounds as done above
-            if (checkCollision(x,y) === null){
-                return Validation(true, false)
-            }
-            else{
-                var targetPiece=checkCollision(x,y)
-                if (targetPiece != null) {
-                    if(piece.isWhitePiece&& targetPiece.isWhitePiece) {
-                        return Validation(false,false)
-                    }
-                    else if (piece.isWhitePiece&&targetPiece.isWhitePiece==false){
-                        return Validation(true,true)
-                    }
-                    else if (piece.isWhitePiece==false&&targetPiece.isWhitePiece==false){
-                        return Validation(false,false)
-                    }
-                    else if (piece.isWhitePiece==false&&targetPiece.isWhitePiece){
-                        return Validation(true,true)
-                    }
-                }
-            }
-        }
-        else{   //if not one of 8 possible moves of the knight
-            return Validation(false, false)
-        }
-    }
+    private fun validateKnight (piece: Piece, x: Int, y: Int) : Validation {}
     private fun validateRook (piece: Piece, x: Int, y: Int) : Validation {}
     private fun validateQueen (piece: Piece, x: Int, y: Int) : Validation {}
     private fun validateKing (piece: Piece, x: Int, y: Int) : Validation {}
