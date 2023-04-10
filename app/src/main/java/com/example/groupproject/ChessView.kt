@@ -93,7 +93,34 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         }
     }
     private fun validateBishop (piece: Piece, x: Int, y: Int) : Validation {}
-    private fun validateKnight (piece: Piece, x: Int, y: Int) : Validation {}
+    private fun validateKnight (piece: Piece, x: Int, y: Int) : Validation {  //piece.x is starting x= moving to
+        if((piece.x+1 == x && piece.y+2 ==y)||(piece.x+2 == x && piece.y+1 ==y)||(piece.x-1 == x && piece.y+2 ==y)||(piece.x-2 == x && piece.y+1 ==y)||(piece.x+1 == x && piece.y-2 ==y)||(piece.x+2 == x && piece.y-1 ==y)||(piece.x-1 == x && piece.y-2 ==y)||(piece.x-2 == x && piece.y-1 ==y)) {  //is the move a possiible valid move, dont have to look at out of bounds as done above
+            if (checkCollision(x,y) === null){
+                return Validation(true, false)
+            }
+            else{
+                var targetPiece=checkCollision(x,y)
+                if (targetPiece != null) {
+                    if(piece.isWhitePiece&& targetPiece.isWhitePiece) {
+                        return Validation(false,false)
+                    }
+                    else if (piece.isWhitePiece&&targetPiece.isWhitePiece==false){
+                        return Validation(true,true)
+                    }
+                    else if (piece.isWhitePiece==false&&targetPiece.isWhitePiece==false){
+                        return Validation(false,false)
+                    }
+                    else if (piece.isWhitePiece==false&&targetPiece.isWhitePiece){
+                        return Validation(true,true)
+                    }
+                }
+            }
+        }
+        else{   //if not one of 8 possible moves of the knight
+            return Validation(false, false)
+        }
+        return Validation(false, false)
+    }
     private fun validateRook (piece: Piece, x: Int, y: Int) : Validation {}
     private fun validateQueen (piece: Piece, x: Int, y: Int) : Validation {}
     private fun validateKing (piece: Piece, x: Int, y: Int) : Validation {}
