@@ -1,8 +1,8 @@
- package com.example.groupproject
+package com.example.groupproject
 
 
 
- class Board {
+class Board {
 
     var board = arrayOf<Array<Space>>()
 
@@ -59,4 +59,3 @@
         board[6][7] = Space(6, 7, Piece.Pawn(6, 7, true))
     }
 }
-
