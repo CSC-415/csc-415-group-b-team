@@ -5,7 +5,8 @@ package com.example.groupproject
 class Board {
 
     var board = arrayOf<Array<Space>>()
-
+    var blackCap = mutableListOf<Piece>()
+    var whiteCap = mutableListOf<Piece>()
     val blackKingX = 0
     val blackKingY = 4
     val whiteKingX = 7

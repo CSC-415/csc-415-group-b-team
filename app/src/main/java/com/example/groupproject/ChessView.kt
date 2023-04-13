@@ -51,6 +51,26 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         )
     }
 
+    private fun move(piece: Piece, x: Int, y: Int) {
+        val validation = validateMove(piece, x, y)
+
+        if (validation.move && validation.capture) { //move w/ capture
+            piece.x = x
+            piece.y = y
+            val tempPiece = board.board[x][y].piece
+            board.board[x][y].piece = piece
+            if (tempPiece!!.isWhitePiece) { //we know this is not null because the validation function is handling it
+                board.whiteCap.add(tempPiece) //if piece is white, add to list of captured white pieces
+            } else {
+                board.blackCap.add(tempPiece) //if piece is black, add to list of captured black pieces
+            }
+        } else if (validation.move) { //just move
+            piece.x = x
+            piece.y = y
+            board.board[x][y].piece = piece
+        }
+    }
+
     private fun validateMove(piece: Piece, x: Int, y: Int) : Validation {
         if (x > 7 || y > 7) { //move is out of bounds
             return Validation(false, false)
@@ -427,7 +447,18 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         }
         return Validation(false, false)
     }
-    private fun validateQueen (piece: Piece, x: Int, y: Int) : Validation {}
+    private fun validateQueen (piece: Piece, x: Int, y: Int) : Validation {
+        val straightValidate = validateRook(piece, x, y)
+        val diagValidate = validateBishop(piece, x, y)
+
+        if ((straightValidate.move && straightValidate.capture) || (diagValidate.move && diagValidate.capture)) { //valid move w/ capture
+            return Validation(true,true)
+        } else if (straightValidate.move || diagValidate.move) { //valid move w/o capture
+            return Validation(true,false)
+        } else { //invalid move
+            return Validation(false,false)
+        }
+    }
     private fun validateKing (piece: Piece, x: Int, y: Int) : Validation {
         if((x-1==piece.x || x+1==piece.x) && (y-1==piece.y || y+1==piece.y) ) {  //if move want to do is within 1 space of original king
             if (checkCollision(x, y) == null) {
