@@ -216,7 +216,7 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         }
 
         i = 1
-        while (i >= 7) { //going top left
+        while (i <= 7) { //going top left
             var xHolder = (piece.x) + i
             var yHolder = (piece.y) - i
             if (xHolder == x && yHolder == y) {//if at where want to move
@@ -245,7 +245,7 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         }
 
         i = 1
-        while (i >= 7) { //going bottom right
+        while (i <= 7) { //going bottom right
             var xHolder = (piece.x) - i
             var yHolder = (piece.y) + i
             if (xHolder == x && yHolder == y) {//if at where want to move
@@ -274,7 +274,7 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         }
 
         i = 1
-        while (i >= 7) { //going bottom left
+        while (i <= 7) { //going bottom left
             var xHolder = (piece.x) - i
             var yHolder = (piece.y) - i
             if (xHolder == x && yHolder == y) {//if at where want to move
