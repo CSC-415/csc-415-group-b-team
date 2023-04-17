@@ -1,11 +1,12 @@
- package com.example.groupproject
+package com.example.groupproject
 
 
 
- class Board {
+class Board {
 
-    var board = Array(8) { Array(8) { Any() } }
-
+    var board = arrayOf<Array<Space>>()
+    var blackCap = mutableListOf<Piece>()
+    var whiteCap = mutableListOf<Piece>()
     val blackKingX = 0
     val blackKingY = 4
     val whiteKingX = 7
@@ -59,4 +60,3 @@
         board[6][7] = Space(6, 7, Piece.Pawn(6, 7, true))
     }
 }
-

@@ -23,5 +23,5 @@ sealed class Piece(
     data class Knight(override var x: Int, override var y: Int, override val isWhitePiece: Boolean) : Piece(x, y, isWhitePiece)
     data class King(override var x: Int, override var y: Int, override val isWhitePiece: Boolean) : Piece(x, y, isWhitePiece)
     data class Queen(override var x: Int, override var y: Int, override val isWhitePiece: Boolean) : Piece(x, y, isWhitePiece)
-    data class CheckerPiece(override var x: Int, override var y: Int, override val isWhitePiece: Boolean) : Piece(x, y, isWhitePiece)
+    //data class CheckerPiece(override var x: Int, override var y: Int, override val isWhitePiece: Boolean) : Piece(x, y, isWhitePiece)
 }
