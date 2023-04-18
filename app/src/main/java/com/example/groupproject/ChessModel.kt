@@ -1,8 +1,64 @@
-//package com.example.groupproject
-//
-//import com.example.groupproject.data.Piece
-//
-//class ChessGame {
+package com.example.groupproject
+
+import com.example.groupproject.data.Piece
+import com.example.groupproject.data.Pieces
+import com.example.groupproject.data.Players
+
+class ChessModel {
+    var piecesBox = mutableSetOf<Pieces>()
+
+    init {
+        reset()
+    }
+
+    fun movePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow: Int) {
+        if (fromCol == toCol && fromRow == toRow) return
+        val movingPiece = pieceAt(fromCol, fromRow) ?: return
+
+        pieceAt(toCol, toRow)?.let {
+            if (it.player == movingPiece.player) {
+                return
+            }
+            piecesBox.remove(it)
+        }
+
+        piecesBox.remove(movingPiece)
+        piecesBox.add(Pieces(toCol, toRow, movingPiece.player, movingPiece.piece, movingPiece.resID))
+    }
+
+    private fun reset() {
+        piecesBox.removeAll(piecesBox)
+        for (i in 0..1) {
+            piecesBox.add(Pieces(0 + i * 7, 0, Players.WHITE, Piece.ROOK, R.drawable.rook_white))
+            piecesBox.add(Pieces(0 + i * 7, 7, Players.BLACK, Piece.ROOK, R.drawable.rook_black))
+
+            piecesBox.add(Pieces(1 + i * 5, 0, Players.WHITE, Piece.KNIGHT, R.drawable.knight_white))
+            piecesBox.add(Pieces(1 + i * 5, 7, Players.BLACK, Piece.KNIGHT, R.drawable.knight_black))
+
+            piecesBox.add(Pieces(2 + i * 3, 0, Players.WHITE, Piece.BISHOP, R.drawable.bishop_white))
+            piecesBox.add(Pieces(2 + i * 3, 7, Players.BLACK, Piece.BISHOP, R.drawable.bishop_black))
+        }
+
+        for (i in 0..7) {
+            piecesBox.add(Pieces(i, 1, Players.WHITE, Piece.PAWN, R.drawable.pawn_white))
+            piecesBox.add(Pieces(i, 6, Players.BLACK, Piece.PAWN, R.drawable.pawn_black))
+        }
+
+        piecesBox.add(Pieces(3, 0, Players.WHITE, Piece.QUEEN, R.drawable.queen_white))
+        piecesBox.add(Pieces(3, 7, Players.BLACK, Piece.QUEEN, R.drawable.queen_black))
+        piecesBox.add(Pieces(4, 0, Players.WHITE, Piece.KING, R.drawable.king_white))
+        piecesBox.add(Pieces(4, 7, Players.BLACK, Piece.KING, R.drawable.king_black))
+    }
+
+    fun pieceAt(col: Int, row: Int) : Pieces? {
+        for (piece in piecesBox) {
+            if (col == piece.col && row == piece.row) {
+                return  piece
+            }
+        }
+        return null
+    }
+}
 //
 //    var board = Board()
 //

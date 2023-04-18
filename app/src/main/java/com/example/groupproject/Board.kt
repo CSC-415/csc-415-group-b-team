@@ -3,11 +3,8 @@ package com.example.groupproject
 import com.example.groupproject.data.Pieces
 
 interface Board {
-    fun pieceAt(space: com.example.groupproject.data.Space): Pieces?
-    fun movePiece(
-        from: com.example.groupproject.data.Space,
-        to: com.example.groupproject.data.Space
-    )
+    fun pieceAt(col: Int, row: Int): Pieces?
+    fun movePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow: Int)
 }
 
 //class Board {

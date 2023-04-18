@@ -52,6 +52,7 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         originY = (height - chessBoardSide) / 2f
 
         drawChessboard(canvas)
+        drawPieces(canvas)
     }
 
     private fun drawChessboard(canvas: Canvas) {
@@ -72,26 +73,47 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     }
 
     private fun drawPieces(canvas: Canvas) {
-        for (row in 0 until 8)
-            for (col in 0 until 8)
-                board?.pieceAt(Space(col, row))?.let { piece ->
-                    if (piece != movingPiece) {
-                        drawPieceAt(canvas, col, row, piece.resID)
+        for (row in 0..7) {
+            for (col in 0..7) {
+                board?.pieceAt(col, row)?.let {
+                    if (it != movingPiece) {
+                        drawPieceAt(canvas, col, row, it.resID)
                     }
                 }
+            }
+        }
 
         movingPieceBitmap?.let {
-            canvas.drawBitmap(it, null, RectF(movingPieceX - cellSide/2, movingPieceY - cellSide/2,movingPieceX + cellSide/2,movingPieceY + cellSide/2), paint)
+            canvas.drawBitmap(
+                it,
+                null,
+                RectF(
+                    movingPieceX - cellSide / 2,
+                    movingPieceY - cellSide / 2,
+                    movingPieceX + cellSide / 2,
+                    movingPieceY + cellSide / 2
+                ), paint
+            )
         }
     }
 
     private fun drawPieceAt(canvas: Canvas, col: Int, row: Int, resID: Int) =
-        canvas.drawBitmap(bitmaps[resID]!!, null, RectF(originX + col * cellSide,originY + (7 - row) * cellSide,originX + (col + 1) * cellSide,originY + ((7 - row) + 1) * cellSide), paint)
+        canvas.drawBitmap(
+            bitmaps[resID]!!,
+            null,
+            RectF(
+                originX + col * cellSide,
+                originY + (7 - row) * cellSide,
+                originX + (col + 1) * cellSide,
+                originY + ((7 - row) + 1) * cellSide
+            ),
+            paint
+        )
 
 
-
-    private fun loadBitmaps() =
-        imgResIDs.forEach { imgResID ->
-            bitmaps[imgResID] = BitmapFactory.decodeResource(resources, imgResID)
+    private fun loadBitmaps() {
+        imgResIDs.forEach {
+            bitmaps[it] = BitmapFactory.decodeResource(resources, it)
         }
+    }
 }
