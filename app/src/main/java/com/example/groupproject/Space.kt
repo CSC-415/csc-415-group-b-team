@@ -1,5 +1,7 @@
 package com.example.groupproject
 
+import com.example.groupproject.data.Piece
+
 class Space {
     var isBlackSpace : Boolean = false
     var piece : Piece? = null
