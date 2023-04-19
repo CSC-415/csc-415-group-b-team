@@ -3,6 +3,7 @@ package com.example.groupproject
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import com.example.groupproject.data.Pieces
 import com.example.groupproject.data.Space
@@ -53,6 +54,35 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
 
         drawChessboard(canvas)
         drawPieces(canvas)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        event ?: return false
+
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                fromCol = ((event.x - originX) / cellSide).toInt()
+                fromRow = 7 - ((event.y - originY) / cellSide).toInt()
+
+                board?.pieceAt(fromCol, fromRow)?.let {
+                    movingPiece = it
+                    movingPieceBitmap = bitmaps[it.resID]
+                }
+            }
+            MotionEvent.ACTION_MOVE -> {
+                movingPieceX = event.x
+                movingPieceY = event.y
+                invalidate()
+            }
+            MotionEvent.ACTION_UP -> {
+                val col = ((event.x - originX) / cellSide).toInt()
+                val row = 7 - ((event.y - originY) / cellSide).toInt()
+                board?.movePiece(fromCol, fromRow, col, row)
+                movingPiece = null
+                movingPieceBitmap = null
+            }
+        }
+        return true
     }
 
     private fun drawChessboard(canvas: Canvas) {
